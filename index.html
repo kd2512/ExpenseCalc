@@ -46,12 +46,22 @@
                     </div>
                     <input
                         type="text"
+                        list ="common"
                         class="form-control"
                         id="inputDesc"
                         placeholder="spent On"
                         aria-label="spent On"
                         aria-describedby="spent at"
                     >
+                    <datalist id="common">
+                        <option value="Food">
+                        <option value="Travel">
+                        <option value="Rent">
+                        <option value="Bill Payments">
+                        <option value="Recharge">
+                        <option value="Shopping">
+                        <option value="Bank">
+                    </datalist>
                     <div class="input-group-append">
                         <button class="btn btn-outline-primary" type="button" id="myBtn" onclick="addExpenseToTotal()">Add</button>
                     </div>
