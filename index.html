@@ -15,7 +15,8 @@
 			src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"
 			integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP"
 			crossorigin="anonymous"
-		></script>
+        ></script>
+        
 		<title>Project_jS</title>
 	</head>
 <body>
@@ -27,14 +28,14 @@
         <div class="container">
             <div class="jumbotron mt-4">
                 <div class="input-group mb-3">
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="inputAmount"
-                        placeholder="Amount spent"
-                        aria-label="Amount spent"
-                        aria-describedby="spent in rupee"
-                    />
+                        <input
+                            type="number"
+                            class="form-control"
+                            id="inputAmount"
+                            placeholder="Amount spent"
+                            aria-label="Amount spent"
+                            aria-describedby="spent in rupee"
+                        >
                     <div class="input-group-append">
                         <span class="input-group-text" id="spent in rupee">₹</span>
                     </div>
@@ -50,98 +51,16 @@
                         placeholder="spent On"
                         aria-label="spent On"
                         aria-describedby="spent at"
-                    />
+                    >
                     <div class="input-group-append">
-                        <button class="btn btn-outline-primary" type="button" id="myBtn">Add</button>
+                        <button class="btn btn-outline-primary" type="button" id="myBtn" onclick="addExpenseToTotal()">Add</button>
                     </div>
                 </div>
             </div>
             <ul class="list-group" id="tableElement"></ul>
         </div>    
     </div>
-    
-    <script>
-        const headingEl=document.querySelector("#headingTotal");
-        const inputElement = document.querySelector("#inputAmount");
-        const inputDescEl = document.querySelector("#inputDesc");
-        const tableElementEl = document.querySelector("#tableElement");
-        let totalExpense=0;
-        let allExpense=[];
-        
-        function addExpenseToTotal() {
-            let expenses={};
-            let moment="";
-            // read value from inputAmount
-            const textAmount = inputElement.value;
-            const textDesc = inputDescEl.value;
-            // convert it to number
-            const expense = Number(textAmount);
-            expenses={
-                amount : expense,
-                desc : textDesc
-            }
-            expenses.moment=new Date();
-            // console.log(expenses.moment);
-            // add that value to totalExpense
-            totalExpense = totalExpense + expense;
-            allExpense.push(expenses);
-
-            updateTotal();
-
-            renderListarr(allExpense);
-        }
-
-        function updateTotal(){
-            let someText = `Total: ${totalExpense}`;
-            headingEl.textContent=someText;
-        }
-
-        function deleteItem(dateValue,amount){
-            console.log('the function was called',dateValue);
-            let newArr=[];
-            for(let i=0;i<allExpense.length;i++){
-                if(allExpense[i].moment.valueOf()!==dateValue){
-                    newArr.push(allExpense[i]);
-                }
-            }
-            renderListarr(newArr);
-            totalExpense=totalExpense-amount;
-            updateTotal();
-        }
-
-        function renderListarr(arrOfList){
-            const expenseArr = arrOfList.map(expense1 => {
-                return `
-                <li class="list-group-item d-flex justify-content-between">
-                     <div class="d-flex flex-column">
-                        ${expense1.desc}
-                        <small class="text-muted">${expense1.moment.toLocaleDateString('en-US',{
-                            year:'numeric',
-                            month:'long',
-                            day:'numeric'
-                            })}</small>
-                    </div>
-                    <div>
-                        <span class="px-5">
-                            ${expense1.amount}
-                        </span>
-                        <button type="button" class="btn btn-outline-danger btn-sm" 
-                        onclick="deleteItem(${expense1.moment.valueOf()},${expense1.amount})">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                    </div>
-				</li>
-                `
-                // return `<div>  ${expense1.amount} :: Desc : ${expense1.desc} </div>`
-            });
-
-            const joinArr = expenseArr.join(" ");
-            tableElementEl.innerHTML= joinArr; 
-            allExpense=arrOfList;
-        }
-        const element=document.querySelector("#myBtn");
-        element.addEventListener("click",addExpenseToTotal,false);
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
 
